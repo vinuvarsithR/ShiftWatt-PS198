@@ -1,0 +1,18 @@
+# App + optional local AI (Ollama). Start:  docker compose up -d   then open http://localhost:8501
+# First time only, download the model:   docker compose exec ollama ollama pull llama3.2
+services:
+  shiftwatt:
+    build: .
+    ports: ["8501:8501"]
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-3.5-flash-lite}
+    depends_on: [ollama]
+    restart: unless-stopped
+  ollama:
+    image: ollama/ollama
+    volumes: [ollama:/root/.ollama]
+    restart: unless-stopped
+volumes:
+  ollama:

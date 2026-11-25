@@ -1,0 +1,6 @@
+__pycache__/
+.llm_cache/
+.pytest_cache/
+*.bat
+.env
+.streamlit/secrets.toml
