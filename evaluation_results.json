@@ -1,0 +1,107 @@
+{
+  "dataset": "UCI Steel Industry Energy Consumption, 35,040 readings (15-min, 2018)",
+  "accuracy": {
+    "per_shift": [
+      {
+        "shift": "Shift A",
+        "engine_kwh": 421278.64,
+        "independent_kwh": 421278.64,
+        "abs_error": 0.0
+      },
+      {
+        "shift": "Shift B",
+        "engine_kwh": 470188.13,
+        "independent_kwh": 470188.13,
+        "abs_error": 0.0
+      },
+      {
+        "shift": "Shift C",
+        "engine_kwh": 68169.94,
+        "independent_kwh": 68169.94,
+        "abs_error": 0.0
+      }
+    ],
+    "max_abs_error_kwh": 0.0,
+    "shift_totals_vs_file_total_diff_kwh": 0.0,
+    "boundary_and_unit_tests": "7/7 pytest tests pass (night-shift boundary, kW\u2192kWh, overlaps, alerts, verifier)"
+  },
+  "hallucination_detection": {
+    "before_v1_check_against_all_values": {
+      "clean_outputs_wrongly_flagged_pct": 0.0,
+      "number_off_by_2pct_detected_pct": 81.67,
+      "number_off_by_5pct_detected_pct": 84.67,
+      "number_off_by_20pct_detected_pct": 86.33,
+      "number_off_by_50pct_detected_pct": 75.33,
+      "invented_cause_or_prediction_detected_pct": 100.0,
+      "number_swapped_between_shifts_detected_pct": 0.0,
+      "trials_per_type": 300
+    },
+    "after_v2_shift_scoped_check": {
+      "clean_outputs_wrongly_flagged_pct": 0.0,
+      "number_off_by_2pct_detected_pct": 88.67,
+      "number_off_by_5pct_detected_pct": 98.0,
+      "number_off_by_20pct_detected_pct": 95.33,
+      "number_off_by_50pct_detected_pct": 93.0,
+      "invented_cause_or_prediction_detected_pct": 100.0,
+      "number_swapped_between_shifts_detected_pct": 100.0,
+      "trials_per_type": 300
+    }
+  },
+  "alert_benchmark": {
+    "injected_anomalies": 204,
+    "injected_in_quiet_hours": 83,
+    "injected_in_busy_hours": 121,
+    "methods": {
+      "ShiftWatt \u2013 Only big problems": {
+        "detected_pct": 42.6,
+        "detected_in_quiet_hours_pct": 100.0,
+        "detected_in_busy_hours_pct": 3.3,
+        "other_readings_flagged_pct": 4.3
+      },
+      "ShiftWatt \u2013 Big and medium (default)": {
+        "detected_pct": 42.6,
+        "detected_in_quiet_hours_pct": 100.0,
+        "detected_in_busy_hours_pct": 3.3,
+        "other_readings_flagged_pct": 4.64
+      },
+      "ShiftWatt \u2013 Everything unusual": {
+        "detected_pct": 46.1,
+        "detected_in_quiet_hours_pct": 100.0,
+        "detected_in_busy_hours_pct": 9.1,
+        "other_readings_flagged_pct": 5.7
+      },
+      "Baseline \u2013 one fixed limit for all hours (mean \u00b1 3 SD)": {
+        "detected_pct": 0.0,
+        "detected_in_quiet_hours_pct": 0.0,
+        "detected_in_busy_hours_pct": 0.0,
+        "other_readings_flagged_pct": 0.58
+      },
+      "Baseline \u2013 per-hour average \u00b1 3 SD (ignores weekday)": {
+        "detected_pct": 26.0,
+        "detected_in_quiet_hours_pct": 63.9,
+        "detected_in_busy_hours_pct": 0.0,
+        "other_readings_flagged_pct": 1.35
+      }
+    }
+  },
+  "translation_safety": {
+    "hi": {
+      "correct_translation_passes": true,
+      "changed_number_detected_pct": 100.0
+    },
+    "kn": {
+      "correct_translation_passes": true,
+      "changed_number_detected_pct": 100.0
+    }
+  },
+  "latency_ms": {
+    "load_and_clean": 88.7,
+    "assign_shifts": 5.6,
+    "shift_stats": 66.4,
+    "alert_scoring": 208.6,
+    "write_brief_builtin": 0.1,
+    "verify_brief": 0.6,
+    "total_ms": 370.0,
+    "rows": 35040
+  }
+}
